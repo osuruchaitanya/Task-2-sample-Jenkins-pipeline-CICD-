@@ -7,9 +7,9 @@ pipeline {
    }
    stage('Clone Code') {
     steps {
-        git credentialsId: 'githubpat',
-            url:  'https://github.com/osruchaitanya9/jenkins-cicd-demo.git'
-    }
+        git credentialsId: 'github-token',
+            url:  'https://github.com/osuruchaitanya/jenkins-cicd-demo.git'
+    }i
   } 
     stage('Install Dependencies'){ 
 	   steps {
