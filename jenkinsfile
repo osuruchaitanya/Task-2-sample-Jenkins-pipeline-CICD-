@@ -9,7 +9,7 @@ pipeline {
     steps {
         git credentialsId: 'github-token',
             url:  'https://github.com/osuruchaitanya/jenkins-cicd-demo.git'
-    }i
+    }
   } 
     stage('Install Dependencies'){ 
 	   steps {
