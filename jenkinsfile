@@ -6,15 +6,14 @@ pipeline {
         DOCKER_TAG = 'latest'
     }
 
-    stages {
-        stage('Clone Code') {
-            steps {
-                git credentialsId: 'github-token',
-                    url: 'https://github.com/osuruchaitanya/Task-2-sample-Jenkins-pipeline-CICD-.git'
-            }
-        }
+   stage('Clone Code') {
+        steps {
+           git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/osuruchaitanya/Task-2-sample-Jenkins-pipeline-CICD-.git'
+       }
+   }
 
-        stage('Install Dependencies') {
+
+       stage('Install Dependencies') {
             steps {
                 bat 'npm install'
             }
