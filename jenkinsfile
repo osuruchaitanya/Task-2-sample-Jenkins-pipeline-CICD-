@@ -23,10 +23,8 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
                 bat  docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                 }
-            }
         }
 
         stage('Test') {
