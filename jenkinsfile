@@ -11,8 +11,9 @@ pipeline {
             steps {
                 git credentialsId: 'github-token',
                     url: 'git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/osuruchaitanya/Task-2-sample-Jenkins-pipeline-CICD-.git''
-        }
-  }
+                }
+          }
+}
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
