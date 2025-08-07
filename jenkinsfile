@@ -10,7 +10,7 @@ pipeline {
         stage('Clone Code') {
             steps {
                 git credentialsId: 'github-token',
-                    url: 'https://github.com/osuruchaitanya/Task-2-sample-Jenkins-pipeline-CICD-/tree/main'
+                    url: 'https://github.com/osuruchaitanya/Task-2-sample-Jenkins-pipeline-CICD/tree/main'
             }
         }
 
