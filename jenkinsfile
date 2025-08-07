@@ -1,13 +1,11 @@
 pipeline {
     agent any
 
-  environment {
-    DOCKER_USER = 'chaitu221'
-    DOCKER_IMAGE_NAME = 'jenkins-cicd-demo'
-    DOCKER_IMAGE = "${DOCKER_USER}/${DOCKER_IMAGE_NAME}"
-    DOCKER_TAG = 'latest'
-}
-
+    environment {
+        DOCKER_USER = 'chaitu221'
+        DOCKER_IMAGE_NAME = 'jenkins-cicd-demo'
+        DOCKER_TAG = 'latest'
+    }
 
     stages {
         stage('Clone Code') {
@@ -24,7 +22,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker tag %DOCKER_IMAGE%:%DOCKER_TAG% %DOCKER_USER%/jenkins-cicd-demo:%DOCKER_TAG%'
+                bat "docker build -t %DOCKER_USER%/%DOCKER_IMAGE_NAME%:%DOCKER_TAG% ."
             }
         }
 
@@ -40,7 +38,7 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS')]) {
                         bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
-                        bat 'docker push %DOCKER_IMAGE%:%DOCKER_TAG%'
+                        bat 'docker push %DOCKER_USER%/%DOCKER_IMAGE_NAME%:%DOCKER_TAG%'
                 }
             }
         }
@@ -51,9 +49,7 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS')]) {
                         bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
-                        bat 'docker tag %DOCKER_IMAGE%:%DOCKER_TAG% %DOCKER_USER%/%DOCKER_IMAGE%:%DOCKER_TAG%'
-                        bat 'docker push %DOCKER_USER%/%DOCKER_IMAGE%:%DOCKER_TAG%'
-                        bat 'docker run -d -p 3000:3000 %DOCKER_USER%/%DOCKER_IMAGE%:%DOCKER_TAG%'
+                        bat 'docker run -d -p 3000:3000 %DOCKER_USER%/%DOCKER_IMAGE_NAME%:%DOCKER_TAG%'
                 }
             }
         }
